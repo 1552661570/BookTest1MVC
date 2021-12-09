@@ -1,4 +1,4 @@
-[English/英文](README.md) | Chinese/中文
+[English/英文](README_EN_US.md) | Chinese/中文
 
 #### 注意：需要 BookStoreDB。 用之前把数据库连接上。
 # BookTest1MVC
