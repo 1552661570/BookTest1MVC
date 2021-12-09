@@ -1,4 +1,4 @@
-English/英文 | [Chinese/中文](README_ZH_CN.md)
+English/英文 | [Chinese/中文](README.md)
 
 #### Important: This project needs to work with BookStoreDB. Modify the database connection string before everything begins.
 # BookTest1MVC
