@@ -1,0 +1,34 @@
+﻿@model BookTest1MVC.Models.ReturnBook
+
+@{
+    ViewData["Title"] = "Return";
+}
+
+<h1>Return</h1>
+
+<h4>Return Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="BorrowOrders" asp-action="proc_BorrowOrder_Return">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderID" />
+            <div class="form-group">
+                <label asp-for="PaymentMethod" class="control-label"></label>
+                <input asp-for="PaymentMethod" class="form-control" />
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Return" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

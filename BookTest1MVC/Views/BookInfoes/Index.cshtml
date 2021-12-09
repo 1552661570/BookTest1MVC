@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BookTest1MVC.Models.BookInfo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Borrow Book</h1>
+
+<p>
+    @{
+        if ((TempData.Peek("PageRole").ToString() == "Manager") || (TempData.Peek("PageRole").ToString() == "Administrator"))
+        {
+            <a asp-action="Create">Create New</a>
+        }
+    }
+</p>
+<form asp-controller="BookInfoes" asp-action="Index" method="get">
+    <p>
+        <input type="text" name="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookAuthor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookInventory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookCollectionTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookeBorrow)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookAuthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookInventory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookCollectionTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookeBorrow)
+            </td>
+            <td style="white-space: nowrap;">
+            @{
+                if ((TempData.Peek("PageRole").ToString() == "Manager") || (TempData.Peek("PageRole").ToString() == "Administrator"))
+                {
+                <a asp-action="Edit" asp-route-id="@item.BookID">Edit |</a>
+                <a asp-action="Details" asp-route-id="@item.BookID"> Details | </a>
+                <a asp-action="Delete" asp-route-id="@item.BookID">Delete </a>
+                }
+            }
+                    @{
+                        if ((item.BookeBorrow == true) && ((TempData.Peek("PageRole").ToString() == "Manager") || (TempData.Peek("PageRole").ToString() == "Borrow") || (TempData.Peek("PageRole").ToString() == "Administrator")))
+                        {
+                            <a asp-action="proc_BorrowOrder_Lend" asp-route-id="@item.BookID">| Borrow |</a>
+                        }
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

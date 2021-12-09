@@ -1,0 +1,43 @@
+﻿@{
+
+    ViewData["Title"] = "Login";
+
+}
+
+<h2 style="text-align:center">Login Page</h2>
+<hr />
+<div>
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <div>
+            <label class="control-label">Uername:</label>
+            <input class="form-control" type="text" name="username" />
+        </div>
+        <div>
+            <label class="control-label">Pwd:</label>
+            <input class="form-control" type="password" name="password" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+    @{
+        if (TempData.Peek("PageRoleName") != null)
+        {
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <input type="submit" value="Logout" class="btn btn-primary" />
+            </form>
+        }
+    }
+</div>
+
+
+
+
+
+@section Scripts {
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+}

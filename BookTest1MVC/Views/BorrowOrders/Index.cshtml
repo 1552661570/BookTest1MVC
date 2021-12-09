@@ -1,0 +1,112 @@
+﻿@model IEnumerable<BookTest1MVC.Models.BorrowOrder>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Borrow Orders</h1>
+
+<p>
+    @{
+        if ((TempData.Peek("PageRole").ToString() == "Manager") || (TempData.Peek("PageRole").ToString() == "Administrator"))
+        {
+            <a asp-action="Create">Create New</a>
+        }
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimatedReturnTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActualReturnTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowBooksCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OverdueDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PenaltyAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentMethod)
+            </th>
+            <th style="white-space: nowrap;"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedReturnTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualReturnTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowBooksCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverdueDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PenaltyAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod)
+            </td>
+            <td style="white-space: nowrap;">
+                @{
+                    if ((TempData.Peek("PageRole").ToString() == "Manager") || (TempData.Peek("PageRole").ToString() == "Administrator"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a>
+                        <label> | </label>
+                        <a asp-action="Details" asp-route-id="@item.OrderId">Details</a>
+                        <label> | </label>
+                        <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+                        if (item.OrderStatus != true)
+                        {
+                            <label> | </label>
+                            <a asp-action="proc_BorrowOrder_Return" asp-route-id="@item.OrderId">|Return the book</a>
+                        }
+                    }
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
